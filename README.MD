@@ -2,11 +2,13 @@
 
 building...
 
-[![Npm](https://img.shields.io/npm/v/@vodyani/utils)](https://www.npmjs.com/package/@vodyani/utils)
+[![Npm](https://img.shields.io/npm/v/@vodyani/utils/latest.svg)](https://www.npmjs.com/package/@vodyani/utils)
+[![Npm](https://img.shields.io/npm/v/@vodyani/utils/beta.svg)](https://www.npmjs.com/package/@vodyani/utils)
 [![Npm](https://img.shields.io/npm/dm/@vodyani/utils)](https://www.npmjs.com/package/@vodyani/utils)
 [![License](https://img.shields.io/github/license/vodyani/utils)](LICENSE)
+<br>
 ![Workflow](https://github.com/vodyani/utils/actions/workflows/release.yml/badge.svg)
-<PACKAGE_CODE_COV_BADGE>
+[![codecov](https://codecov.io/gh/vodyani/utils/branch/master/graph/badge.svg?token=CI3WEJUN6L)](https://codecov.io/gh/vodyani/utils)
 
 ## Features
 

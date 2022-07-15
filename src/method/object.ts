@@ -31,7 +31,7 @@ export function isDict(dict: any) {
  * Determines whether the object contains the current attribute.
  *
  * @param obj The object to judge.
- * @param key property of object.
+ * @param key The property of object.
  * @returns (is keyof typeof obj)
  *
  * @publicApi

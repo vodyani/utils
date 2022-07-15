@@ -20,7 +20,7 @@ npm install @vodyani/utils
 
 |Features|Type|Description|
 |:-:|:-:|:-:|
-|[`isDict`](#isdict)|object|Checks whether the current object is a dictionary object.|
+|[isDict](#isdict)|object|Checks whether the current object is a dictionary object.|
 |[isKeyof](#iskeyof)|object|Determines whether the object contains the current attribute.|
 |[toMatch](#tomatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
 |[toRestore](#torestore)|object|Restores to the corresponding object based on the depth of the specified property and property value.|
@@ -32,13 +32,15 @@ npm install @vodyani/utils
 
 ### isDict
 
-**param**
+**Params**
 
-- `dict` The object to judge.
+|param|type|description|
+|:-:|:-:|:-:|
+|`dict`|`any`|*The object to judge.*|
 
 **return**
 
-- `boolean`
+`boolean`
 
 **example**
 ```ts
@@ -60,12 +62,14 @@ isDict(undefined) // false
 
 **param**
 
-- `obj` The object to judge.
-- `key` property of object.
+|param|type|description|
+|:-:|:-:|:-:|
+|`obj`|`object`|*The object to judge.*|
+|`key`|`string`/`number`/`symbol`|*The property of object.*|
 
 **return**
 
-- `is keyof typeof obj`
+`is keyof typeof obj`
 
 **example**
 

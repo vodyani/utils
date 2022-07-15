@@ -34,5 +34,7 @@ describe('method.object', () => {
     expect(toRestore(1, 'a')).toEqual({ a: 1 });
     const deepKey = range(10000).join('.');
     expect(toMatch(toRestore(1, deepKey), deepKey)).toBe(1);
+    expect(toRestore(null, 'a')).toEqual({ a: null });
+    expect(toRestore('null', null as any)).toBe(null);
   });
 });

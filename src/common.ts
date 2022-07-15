@@ -9,7 +9,7 @@ export interface RetryOptions {
 
 export interface CycleOptions {
   /** cycle time, default 1000 (The time unit is milliseconds). */
-  interval?: number;
+  interval: number;
   /** callback argument. */
   args?: any[];
 }

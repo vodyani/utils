@@ -7,13 +7,14 @@ import { isArray, isBuffer, isFunction, isMap, isNil, isObject, isRegExp, isSet,
  *
  * Dictionary object is not in (`Map`/`Set`/`Symbol`/`Buffer`/`Array`/`Stream`/`RegExp`/`Function`/`String`/`Number`/`Boolean`).
  *
- * @param dict dictionary object
+ * @param dict The object to judge.
  * @returns boolean
  *
  * @publicApi
  */
-export function isDict(dict: object) {
+export function isDict(dict: any) {
   return isObject(dict)
+    && !isNil(dict)
     && !isMap(dict)
     && !isSet(dict)
     && !isArray(dict)
@@ -29,7 +30,7 @@ export function isDict(dict: object) {
 /**
  * Determines whether the object contains the current attribute.
  *
- * @param obj object.
+ * @param obj The object to judge.
  * @param key property of object.
  * @returns (is keyof typeof obj)
  *

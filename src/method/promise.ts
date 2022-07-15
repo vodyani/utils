@@ -50,7 +50,7 @@ export function toCycle(callback: Function, options: CycleOptions): CycleClearHa
   return { close };
 }
 /**
- * Create a caller that can retry the callback function
+ * Create a caller that can retry the callback function.
  *
  * @param callback The callback function to call.
  * @param options Configuration options when triggered.

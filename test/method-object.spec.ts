@@ -1,10 +1,31 @@
+/* eslint-disable no-buffer-constructor */
+/* eslint-disable @typescript-eslint/no-array-constructor */
+/* eslint-disable no-array-constructor */
+/* eslint-disable no-new-wrappers */
 /* eslint-disable no-undefined */
+import { Stream } from 'stream';
+
 import { range } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 
-import { isKeyof, toMatch, toRestore } from '../src';
+import { isDict, isKeyof, toMatch, toRestore } from '../src';
 
 describe('method.object', () => {
+  it('isDict', async () => {
+    expect(isDict({})).toBe(true);
+    expect(isDict({ name: 'dict' })).toBe(true);
+    expect(isDict(new String())).toBe(false);
+    expect(isDict(new Number())).toBe(false);
+    expect(isDict(new Boolean())).toBe(false);
+    expect(isDict(new Map())).toBe(false);
+    expect(isDict(new Set())).toBe(false);
+    expect(isDict(new Array())).toBe(false);
+    expect(isDict(Buffer.from([]))).toBe(false);
+    expect(isDict(new Stream())).toBe(false);
+    expect(isDict(null)).toBe(false);
+    expect(isDict(undefined)).toBe(false);
+  });
+
   it('isKeyof', async () => {
     const sym = Symbol(1);
     const obj = { test: 'test' };

@@ -9,6 +9,7 @@
 <br>
 ![Workflow](https://github.com/vodyani/utils/actions/workflows/release.yml/badge.svg)
 [![codecov](https://codecov.io/gh/vodyani/utils/branch/master/graph/badge.svg?token=CI3WEJUN6L)](https://codecov.io/gh/vodyani/utils)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 ## Installation
 
@@ -42,11 +43,11 @@ Checks whether the current object is a dictionary object.
 |:-:|:-:|:-:|
 |`dict`|`any`|*The object to judge.*|
 
-**return**
+**Return**
 
 `boolean`
 
-**example**
+**Example**
 ```ts
 isDictionary({}) // true
 isDictionary(Object()) // true
@@ -67,18 +68,18 @@ isDictionary(undefined) // false
 
 Determines whether the object contains the current attribute.
 
-**param**
+**Params**
 
 |param|type|description|
 |:-:|:-:|:-:|
 |`obj`|`object`|*The object to judge.*|
 |`key`|`string`/`number`/`symbol`|*The property of object.*|
 
-**return**
+**Return**
 
 `boolean`
 
-**example**
+**Example**
 
 ```ts
 const sym = Symbol(1);
@@ -104,11 +105,11 @@ Walks deeply through the object and returns the property value corresponding to 
 |`token`|`string`|*The properties of the object and splice them with `rule`.*|
 |`rule`|`string`|*The rules for splicing, by default, are `.`*|
 
-**return**
+**Return**
 
 `T` | `any`
 
-**example**
+**Example**
 
 ```ts
 toMatch({ job: { name: 'job' }}, 'job.name') // 'job'
@@ -127,11 +128,11 @@ Restores to the corresponding object based on the depth of the specified propert
 |`token`|`string`|*The properties of the object and splice them with `rule`.*|
 |`rule`|`string`|*The rules for splicing, by default, are `.`*|
 
-**return**
+**Return**
 
 `T` | `any`
 
-**example**
+**Example**
 
 ```ts
 toRestore('job', 'job.name') // { job: { name: 'job' }}
@@ -148,11 +149,11 @@ Convert Stream data to buffer.
 |:-:|:-:|:-:|
 |`stream`|`Stream`|*The stream data.*|
 
-**return**
+**Return**
 
 `Promise<Buffer>`
 
-**example**
+**Example**
 
 ```ts
 await toBuffer(data) // => stream data
@@ -169,11 +170,11 @@ Convert Buffer data to stream.
 |`buffer`|`Buffer`|*The buffer data.*|
 |`encoding`|`ascii`/`utf8`/`utf-8`/`utf16le`/`ucs2`/`ucs-2`/`base64`/`base64url`/`latin1`/`binary`/`hex`|*The encoding type.*|
 
-**return**
+**Return**
 
 `Promise<Duplex>`
 
-**example**
+**Example**
 
 ```ts
 await toStream(data) // => buffer data
@@ -189,11 +190,11 @@ Wait during an asynchronous function call.
 |:-:|:-:|:-:|
 |`delay`|`number`|*The waiting time (The time unit is milliseconds).*|
 
-**return**
+**Return**
 
 `Promise<void>`
 
-**example**
+**Example**
 
 ```ts
 await toDelay(2000) // To waiting 2000 milliseconds ...
@@ -221,7 +222,7 @@ export interface CycleOptions {
 }
 ```
 
-**return**
+**Return**
 
 `CycleClearHandler` Returns a method that closes timed calls.
 
@@ -234,7 +235,7 @@ export interface CycleClearHandler {
 }
 ```
 
-**example**
+**Example**
 
 ```ts
 await toCycle(fn, { interval: 1000 }) // The fn function is executed every 2000 milliseconds ...
@@ -264,11 +265,11 @@ export interface RetryOptions {
 }
 ```
 
-**return**
+**Return**
 
 `Promise<T>` | `Promise<any>`
 
-**example**
+**Example**
 
 ```ts
 await toRetry(fn, { delay: 100, count: 3 }) // The `fn` will wait 100 milliseconds after a failure and then call again three times

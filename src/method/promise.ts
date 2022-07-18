@@ -5,7 +5,7 @@ import { CycleClearHandler, CycleOptions, RetryOptions } from '../common';
 /**
  * Wait during an asynchronous function call.
  *
- * @param delay waiting time (The time unit is milliseconds).
+ * @param delay The waiting time (The time unit is milliseconds).
  * @returns Promise<void>
  *
  * @publicApi
@@ -23,12 +23,12 @@ export function toDelay(delay: number) {
  * @publicApi
  */
 export function toCycle(callback: Function, options: CycleOptions): CycleClearHandler {
-  const args = options?.args || [];
+  const args = options.args || [];
   let timeOutHandler: NodeJS.Timeout = null;
 
   const regularly = () => {
     close();
-    timeOutHandler = setTimeout(regularlyHandler, options?.interval || 1000);
+    timeOutHandler = setTimeout(regularlyHandler, options.interval);
   };
 
   const clearHandler = () => {
@@ -50,7 +50,7 @@ export function toCycle(callback: Function, options: CycleOptions): CycleClearHa
   return { close };
 }
 /**
- * Create a caller that can retry the callback function
+ * Create a caller that can retry the callback function.
  *
  * @param callback The callback function to call.
  * @param options Configuration options when triggered.
@@ -58,11 +58,11 @@ export function toCycle(callback: Function, options: CycleOptions): CycleClearHa
  *
  * @publicApi
  */
-export async function toRetry<T = any>(callback: Function, options?: RetryOptions): Promise<T> {
+export async function toRetry<T = any>(callback: Function, options: RetryOptions): Promise<T> {
   let result = null;
-  let currentCount = options?.count || 1;
-  const currentArgs = options?.args || [];
-  const currentDelay = options?.delay || 100;
+  let currentCount = options.count;
+  const currentDelay = options.delay;
+  const currentArgs = options.args || [];
 
   try {
     result = await callback(...currentArgs);

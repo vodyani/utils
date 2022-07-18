@@ -1,10 +1,32 @@
+/* eslint-disable no-buffer-constructor */
+/* eslint-disable @typescript-eslint/no-array-constructor */
+/* eslint-disable no-array-constructor */
+/* eslint-disable no-new-wrappers */
 /* eslint-disable no-undefined */
+import { Stream } from 'stream';
+
 import { range } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 
-import { isKeyof, toMatch, toRestore } from '../src';
+import { isDictionary, isKeyof, toMatch, toRestore } from '../src';
 
 describe('method.object', () => {
+  it('isDictionary', async () => {
+    expect(isDictionary({})).toBe(true);
+    expect(isDictionary(Object())).toBe(true);
+    expect(isDictionary({ name: 'dict' })).toBe(true);
+    expect(isDictionary(new String())).toBe(false);
+    expect(isDictionary(new Number())).toBe(false);
+    expect(isDictionary(new Boolean())).toBe(false);
+    expect(isDictionary(new Map())).toBe(false);
+    expect(isDictionary(new Set())).toBe(false);
+    expect(isDictionary(new Array())).toBe(false);
+    expect(isDictionary(Buffer.from([]))).toBe(false);
+    expect(isDictionary(new Stream())).toBe(false);
+    expect(isDictionary(null)).toBe(false);
+    expect(isDictionary(undefined)).toBe(false);
+  });
+
   it('isKeyof', async () => {
     const sym = Symbol(1);
     const obj = { test: 'test' };
@@ -34,5 +56,7 @@ describe('method.object', () => {
     expect(toRestore(1, 'a')).toEqual({ a: 1 });
     const deepKey = range(10000).join('.');
     expect(toMatch(toRestore(1, deepKey), deepKey)).toBe(1);
+    expect(toRestore(null, 'a')).toEqual({ a: null });
+    expect(toRestore('null', null as any)).toBe(null);
   });
 });

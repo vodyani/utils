@@ -13,22 +13,22 @@ describe('method.promise', () => {
     expect(Date.now() - start).toBeGreaterThanOrEqual(299);
   });
 
-  // it('toRetry', async () => {
-  //   let count = 0;
+  it('toRetry', async () => {
+    let count = 0;
 
-  //   const fn = async () => {
-  //     if (count < 1) {
-  //       count += 1;
-  //       throw new Error('error');
-  //     }
+    const fn = async () => {
+      if (count < 1) {
+        count += 1;
+        throw new Error('error');
+      }
 
-  //     return count;
-  //   };
+      return count;
+    };
 
-  //   const result = await toRetry(fn, { delay: 100, count: 3 });
+    const result = await toRetry(fn, { delay: 100, count: 3 });
 
-  //   expect(result).toBe(1);
-  // });
+    expect(result).toBe(1);
+  });
 
   it('toRetry.error', async () => {
     let result = 0;

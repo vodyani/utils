@@ -20,7 +20,7 @@ npm install @vodyani/utils
 
 |Features|Type|Description|
 |:-:|:-:|:-:|
-|[isDict](#isdict)|object|Checks whether the current object is a dictionary object.|
+|[isDictionary](#isdictionary)|object|Checks whether the current object is a dictionary object.|
 |[isKeyof](#iskeyof)|object|Determines whether the object contains the current attribute.|
 |[toMatch](#tomatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
 |[toRestore](#torestore)|object|Restores to the corresponding object based on the depth of the specified property and property value.|
@@ -30,7 +30,11 @@ npm install @vodyani/utils
 |[toCycle](#tocycle)|promise|Create a recurring scheduled task.|
 |[toRetry](#toretry)|promise|Create a caller that can retry the callback function.|
 
-### isDict
+### isDictionary
+
+Checks whether the current object is a dictionary object.
+
+⚠️ Dictionary is not in (`Map`/`Set`/`Symbol`/`Buffer`/`Array`/`Stream`/`RegExp`/`Function`/`String`/`Number`/`Boolean`).
 
 **Params**
 
@@ -44,21 +48,24 @@ npm install @vodyani/utils
 
 **example**
 ```ts
-isDict({}) // true
-isDict({ name: 'dict' }) // true
-isDict(new String()) // false
-isDict(new Number()) // false
-isDict(new Boolean()) // false
-isDict(new Map()) // false
-isDict(new Set()) // false
-isDict(new Array()) // false
-isDict(Buffer.from([])) // false
-isDict(new Stream()) // false
-isDict(null) // false
-isDict(undefined) // false
+isDictionary({}) // true
+isDictionary(Object()) // true
+isDictionary({ name: 'dict' }) // true
+isDictionary(new String()) // false
+isDictionary(new Number()) // false
+isDictionary(new Boolean()) // false
+isDictionary(new Map()) // false
+isDictionary(new Set()) // false
+isDictionary(new Array()) // false
+isDictionary(Buffer.from([])) // false
+isDictionary(new Stream()) // false
+isDictionary(null) // false
+isDictionary(undefined) // false
 ```
 
 ### isKeyof
+
+Determines whether the object contains the current attribute.
 
 **param**
 
@@ -69,7 +76,7 @@ isDict(undefined) // false
 
 **return**
 
-`is keyof typeof obj`
+`boolean`
 
 **example**
 
@@ -86,12 +93,186 @@ isKeyof(obj2, sym) // true
 ```
 
 ### toMatch
+
+Walks deeply through the object and returns the property value corresponding to the specified parameter.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`obj`|`any`|*The object to judge.*|
+|`token`|`string`|*The properties of the object and splice them with `rule`.*|
+|`rule`|`string`|*The rules for splicing, by default, are `.`*|
+
+**return**
+
+`T` | `any`
+
+**example**
+
+```ts
+toMatch({ job: { name: 'job' }}, 'job.name') // 'job'
+toMatch({ cat: { info: { name: 'mimi' } }}, 'cat.info.name') // 'mimi'
+```
+
 ### toRestore
+
+Restores to the corresponding object based on the depth of the specified property and property value.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`value`|`any`|*The object properties value.*|
+|`token`|`string`|*The properties of the object and splice them with `rule`.*|
+|`rule`|`string`|*The rules for splicing, by default, are `.`*|
+
+**return**
+
+`T` | `any`
+
+**example**
+
+```ts
+toRestore('job', 'job.name') // { job: { name: 'job' }}
+toRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
+```
+
 ### toBuffer
+
+Convert Stream data to buffer.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`stream`|`Stream`|*The stream data.*|
+
+**return**
+
+`Promise<Buffer>`
+
+**example**
+
+```ts
+await toBuffer(data) // => stream data
+```
+
 ### toStream
+
+Convert Buffer data to stream.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`buffer`|`Buffer`|*The buffer data.*|
+|`encoding`|`ascii`/`utf8`/`utf-8`/`utf16le`/`ucs2`/`ucs-2`/`base64`/`base64url`/`latin1`/`binary`/`hex`|*The encoding type.*|
+
+**return**
+
+`Promise<Duplex>`
+
+**example**
+
+```ts
+await toStream(data) // => buffer data
+```
+
 ### toDelay
+
+Wait during an asynchronous function call.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`delay`|`number`|*The waiting time (The time unit is milliseconds).*|
+
+**return**
+
+`Promise<void>`
+
+**example**
+
+```ts
+await toDelay(2000) // To waiting 2000 milliseconds ...
+```
+
 ### toCycle
+
+Create a recurring scheduled task.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`callback`|`Function`|*A callback function that needs to be called periodically.*|
+|`options`|`CycleOptions`|*Configuration options when triggered.*|
+
+*CycleOptions*
+
+```ts
+export interface CycleOptions {
+  /** The cycle time, default 1000 (The time unit is milliseconds). */
+  interval: number;
+  /** The callback argument. */
+  args?: any[];
+}
+```
+
+**return**
+
+`CycleClearHandler` Returns a method that closes timed calls.
+
+*CycleClearHandler*
+
+```ts
+export interface CycleClearHandler {
+  /** The closes timed calls. */
+  close: () => void
+}
+```
+
+**example**
+
+```ts
+await toCycle(fn, { interval: 1000 }) // The fn function is executed every 2000 milliseconds ...
+```
+
 ### toRetry
+
+Create a recurring scheduled task.
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`callback`|`Function`|*The callback function to call.*|
+|`options`|`RetryOptions`|*Configuration options when triggered.*|
+
+*RetryOptions*
+
+```ts
+export interface RetryOptions {
+  /** The retry count. */
+  count: number;
+  /** The waiting time (The time unit is milliseconds). */
+  delay: number;
+  /** The callback argument.*/
+  args?: any[];
+}
+```
+
+**return**
+
+`Promise<T>` | `Promise<any>`
+
+**example**
+
+```ts
+await toRetry(fn, { delay: 100, count: 3 }) // The `fn` will wait 100 milliseconds after a failure and then call again three times
+```
 
 ## Team
 

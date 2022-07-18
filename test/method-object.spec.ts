@@ -8,22 +8,23 @@ import { Stream } from 'stream';
 import { range } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 
-import { isDict, isKeyof, toMatch, toRestore } from '../src';
+import { isDictionary, isKeyof, toMatch, toRestore } from '../src';
 
 describe('method.object', () => {
-  it('isDict', async () => {
-    expect(isDict({})).toBe(true);
-    expect(isDict({ name: 'dict' })).toBe(true);
-    expect(isDict(new String())).toBe(false);
-    expect(isDict(new Number())).toBe(false);
-    expect(isDict(new Boolean())).toBe(false);
-    expect(isDict(new Map())).toBe(false);
-    expect(isDict(new Set())).toBe(false);
-    expect(isDict(new Array())).toBe(false);
-    expect(isDict(Buffer.from([]))).toBe(false);
-    expect(isDict(new Stream())).toBe(false);
-    expect(isDict(null)).toBe(false);
-    expect(isDict(undefined)).toBe(false);
+  it('isDictionary', async () => {
+    expect(isDictionary({})).toBe(true);
+    expect(isDictionary(Object())).toBe(true);
+    expect(isDictionary({ name: 'dict' })).toBe(true);
+    expect(isDictionary(new String())).toBe(false);
+    expect(isDictionary(new Number())).toBe(false);
+    expect(isDictionary(new Boolean())).toBe(false);
+    expect(isDictionary(new Map())).toBe(false);
+    expect(isDictionary(new Set())).toBe(false);
+    expect(isDictionary(new Array())).toBe(false);
+    expect(isDictionary(Buffer.from([]))).toBe(false);
+    expect(isDictionary(new Stream())).toBe(false);
+    expect(isDictionary(null)).toBe(false);
+    expect(isDictionary(undefined)).toBe(false);
   });
 
   it('isKeyof', async () => {

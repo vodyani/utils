@@ -5,7 +5,7 @@ import { CycleClearHandler, CycleOptions, RetryOptions } from '../common';
 /**
  * Wait during an asynchronous function call.
  *
- * @param delay waiting time (The time unit is milliseconds).
+ * @param delay The waiting time (The time unit is milliseconds).
  * @returns Promise<void>
  *
  * @publicApi

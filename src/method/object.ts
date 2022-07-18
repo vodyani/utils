@@ -3,16 +3,16 @@ import { Stream } from 'stream';
 import { isArray, isBuffer, isFunction, isMap, isNil, isObject, isRegExp, isSet, isString, isSymbol } from 'lodash';
 
 /**
- * Checks whether the current object is a dictionary object.
+ * Checks whether the current object is a dictionary.
  *
- * Dictionary object is not in (`Map`/`Set`/`Symbol`/`Buffer`/`Array`/`Stream`/`RegExp`/`Function`/`String`/`Number`/`Boolean`).
+ * Dictionary is not in (`Map`/`Set`/`Symbol`/`Buffer`/`Array`/`Stream`/`RegExp`/`Function`/`String`/`Number`/`Boolean`).
  *
  * @param dict The object to judge.
  * @returns boolean
  *
  * @publicApi
  */
-export function isDict(dict: any) {
+export function isDictionary(dict: any) {
   return isObject(dict)
     && !isNil(dict)
     && !isMap(dict)
@@ -37,13 +37,13 @@ export function isDict(dict: any) {
  * @publicApi
  */
 export function isKeyof(obj: object, key: string | number | symbol): key is keyof typeof obj {
-  return !isNil(obj) && isDict(obj) && key in obj && Object.prototype.hasOwnProperty.call(obj, key);
+  return !isNil(obj) && isDictionary(obj) && key in obj && Object.prototype.hasOwnProperty.call(obj, key);
 }
 /**
  * Walks deeply through the object and returns the property value corresponding to the specified parameter.
  *
- * @param obj object.
- * @param token properties of the object and splice them with `rule`.
+ * @param obj The object to judge.
+ * @param token The properties of the object and splice them with `rule`.
  * @param rule The rules for splicing, by default, are `.`.
  * @returns T
  *
@@ -55,7 +55,7 @@ export function isKeyof(obj: object, key: string | number | symbol): key is keyo
  * @publicApi
  */
 export function toMatch<T = any>(obj: any, token: string, rule = '.'): T {
-  if (!isString(rule) || isNil(obj) || !isDict(obj)) return null;
+  if (!isString(rule) || isNil(obj) || !isDictionary(obj)) return null;
 
   const stack = [];
   const factors = token.split(rule);
@@ -74,7 +74,7 @@ export function toMatch<T = any>(obj: any, token: string, rule = '.'): T {
       break;
     }
 
-    if (isDict(node)) {
+    if (isDictionary(node)) {
       for (const key of Object.keys(node)) {
         const indexResult = factors.indexOf(key);
         const factorResult = factors[nodeDeepLevel];
@@ -93,8 +93,8 @@ export function toMatch<T = any>(obj: any, token: string, rule = '.'): T {
 /**
  * Restores to the corresponding object based on the depth of the specified property and property value.
  *
- * @param value any
- * @param token properties of the object and splice them with `rule`.
+ * @param value The object properties value.
+ * @param token The properties of the object and splice them with `rule`.
  * @param rule The rules for splicing, by default, are `.`.
  * @returns T
  *

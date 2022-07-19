@@ -25,8 +25,6 @@ npm install @vodyani/utils
 |[isKeyof](#iskeyof)|object|Determines whether the object contains the current attribute.|
 |[toMatch](#tomatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
 |[toRestore](#torestore)|object|Restores to the corresponding object based on the depth of the specified property and property value.|
-|[toBuffer](#tobuffer)|stream|Convert Stream data to buffer.|
-|[toStream](#tostream)|stream|Convert Buffer data to stream.|
 |[toDelay](#todelay)|promise|Wait during an asynchronous function call.|
 |[toCycle](#tocycle)|promise|Create a recurring scheduled task.|
 |[toRetry](#toretry)|promise|Create a caller that can retry the callback function.|
@@ -137,47 +135,6 @@ Restores to the corresponding object based on the depth of the specified propert
 ```ts
 toRestore('job', 'job.name') // { job: { name: 'job' }}
 toRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
-```
-
-### toBuffer
-
-Convert Stream data to buffer.
-
-**Params**
-
-|param|type|description|
-|:-:|:-:|:-:|
-|`stream`|`Stream`|*The stream data.*|
-
-**Return**
-
-`Promise<Buffer>`
-
-**Example**
-
-```ts
-await toBuffer(data) // => stream data
-```
-
-### toStream
-
-Convert Buffer data to stream.
-
-**Params**
-
-|param|type|description|
-|:-:|:-:|:-:|
-|`buffer`|`Buffer`|*The buffer data.*|
-|`encoding`|`ascii`/`utf8`/`utf-8`/`utf16le`/`ucs2`/`ucs-2`/`base64`/`base64url`/`latin1`/`binary`/`hex`|*The encoding type.*|
-
-**Return**
-
-`Promise<Duplex>`
-
-**Example**
-
-```ts
-await toStream(data) // => buffer data
 ```
 
 ### toDelay

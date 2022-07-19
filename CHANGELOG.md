@@ -1,3 +1,10 @@
+# [1.2.0-beta.1](https://github.com/vodyani/utils/compare/v1.1.1...v1.2.0-beta.1) (2022-07-19)
+
+
+### Features
+
+* remove stream unit ([d9bca96](https://github.com/vodyani/utils/commit/d9bca96d45192e45ba2d48d770e62ca5e320c9aa))
+
 ## [1.1.1](https://github.com/vodyani/utils/compare/v1.1.0...v1.1.1) (2022-07-18)
 
 

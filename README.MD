@@ -21,6 +21,7 @@ npm install @vodyani/utils
 
 |Features|Type|Description|
 |:-:|:-:|:-:|
+|[This](#this)|class|A class or method decorator which binds methods to the instance so this is always correct, even when the method is detached.|
 |[isDictionary](#isdictionary)|object|Checks whether the current object is a dictionary object.|
 |[isKeyof](#iskeyof)|object|Determines whether the object contains the current attribute.|
 |[toDeepMatch](#todeepmatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
@@ -30,6 +31,34 @@ npm install @vodyani/utils
 |[toDelay](#todelay)|promise|Wait during an asynchronous function call.|
 |[toCycle](#tocycle)|promise|Create a recurring scheduled task.|
 |[toRetry](#toretry)|promise|Create a caller that can retry the callback function.|
+
+### This
+
+A class or method decorator which binds methods to the instance so this is always correct, even when the method is detached.
+
+**tips:** To learn how merging works, visit: [autobind-decorator](https://github.com/andreypopp/autobind-decorator).
+
+**Example**
+
+```ts
+import { This } from '@vodyani/utils';
+
+class User {
+  private readonly name = 'demo';
+  private readonly age = 1;
+
+  public getName() { return this.name; }
+
+  @This
+  public getAge() { return this.age; }
+}
+
+const user = new User();
+const fn = (cb: Function) => cb();
+
+fn(user.getAge); // 1
+fn(user.getName); // Error: Cannot read properties of undefined (reading 'name')
+```
 
 ### isDictionary
 
@@ -49,6 +78,8 @@ Checks whether the current object is a dictionary object.
 
 **Example**
 ```ts
+import { isDictionary } from '@vodyani/utils';
+
 isDictionary({}) // true
 isDictionary(Object()) // true
 isDictionary({ name: 'dict' }) // true
@@ -82,6 +113,8 @@ Determines whether the object contains the current attribute.
 **Example**
 
 ```ts
+import { isKeyof } from '@vodyani/utils';
+
 const sym = Symbol(1);
 const obj = { test: 'test' };
 const obj1 = { 0: 'test' };
@@ -112,6 +145,8 @@ Walks deeply through the object and returns the property value corresponding to 
 **Example**
 
 ```ts
+import { toDeepMatch } from '@vodyani/utils';
+
 toDeepMatch({ job: { name: 'job' }}, 'job.name') // 'job'
 toDeepMatch({ cat: { info: { name: 'mimi' } }}, 'cat.info.name') // 'mimi'
 ```
@@ -135,6 +170,8 @@ Restores to the corresponding object based on the depth of the specified propert
 **Example**
 
 ```ts
+import { toDeepRestore } from '@vodyani/utils';
+
 toDeepRestore('job', 'job.name') // { job: { name: 'job' }}
 toDeepRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
 ```
@@ -162,6 +199,8 @@ Deep comparison and fusion are performed on the two incoming data.
 **Example**
 
 ```ts
+import { toDeepMerge } from '@vodyani/utils';
+
 const base = { a: 1, b: 2 };
 const source = { a: 3, c: 4 };
 toDeepMerge(base, source) // { a: 3, b: 2, c: 4 };
@@ -197,6 +236,8 @@ This is a higher-order method that you usually need to use in conjunction with o
 **Example**
 
 ```ts
+import { toDeepCamelCase } from '@vodyani/utils';
+
 import { camelCase } from 'lodash';
 
 const toDeepCamelCase = (data: any) => toDeepConvertProperty(data, camelCase);
@@ -221,6 +262,8 @@ Wait during an asynchronous function call.
 **Example**
 
 ```ts
+import { toDelay } from '@vodyani/utils';
+
 await toDelay(2000) // To waiting 2000 milliseconds ...
 ```
 
@@ -262,6 +305,8 @@ export interface CycleClearHandler {
 **Example**
 
 ```ts
+import { toCycle } from '@vodyani/utils';
+
 await toCycle(fn, { interval: 1000 }) // The fn function is executed every 2000 milliseconds ...
 ```
 
@@ -296,6 +341,8 @@ export interface RetryOptions {
 **Example**
 
 ```ts
+import { toRetry } from '@vodyani/utils';
+
 await toRetry(fn, { delay: 100, count: 3 }) // The `fn` will wait 100 milliseconds after a failure and then call again three times
 ```
 

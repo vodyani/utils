@@ -23,8 +23,10 @@ npm install @vodyani/utils
 |:-:|:-:|:-:|
 |[isDictionary](#isdictionary)|object|Checks whether the current object is a dictionary object.|
 |[isKeyof](#iskeyof)|object|Determines whether the object contains the current attribute.|
-|[toMatch](#tomatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
-|[toRestore](#torestore)|object|Restores to the corresponding object based on the depth of the specified property and property value.|
+|[toDeepMatch](#todeepmatch)|object|Walks deeply through the object and returns the property value corresponding to the specified parameter.|
+|[toDeepRestore](#todeeprestore)|object|Restores to the corresponding object based on the depth of the specified property and property value.|
+|[toDeepMerge](#todeepmerge)|object|Deep comparison and fusion are performed on the two incoming data.|
+|[toDeepConvertProperty](#todeepconvertproperty)|object|Formatting properties of the object in the data.|
 |[toDelay](#todelay)|promise|Wait during an asynchronous function call.|
 |[toCycle](#tocycle)|promise|Create a recurring scheduled task.|
 |[toRetry](#toretry)|promise|Create a caller that can retry the callback function.|
@@ -91,7 +93,7 @@ isKeyof(obj1, 0) // true
 isKeyof(obj2, sym) // true
 ```
 
-### toMatch
+### toDeepMatch
 
 Walks deeply through the object and returns the property value corresponding to the specified parameter.
 
@@ -110,11 +112,11 @@ Walks deeply through the object and returns the property value corresponding to 
 **Example**
 
 ```ts
-toMatch({ job: { name: 'job' }}, 'job.name') // 'job'
-toMatch({ cat: { info: { name: 'mimi' } }}, 'cat.info.name') // 'mimi'
+toDeepMatch({ job: { name: 'job' }}, 'job.name') // 'job'
+toDeepMatch({ cat: { info: { name: 'mimi' } }}, 'cat.info.name') // 'mimi'
 ```
 
-### toRestore
+### toDeepRestore
 
 Restores to the corresponding object based on the depth of the specified property and property value.
 
@@ -133,8 +135,73 @@ Restores to the corresponding object based on the depth of the specified propert
 **Example**
 
 ```ts
-toRestore('job', 'job.name') // { job: { name: 'job' }}
-toRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
+toDeepRestore('job', 'job.name') // { job: { name: 'job' }}
+toDeepRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
+```
+
+### toDeepMerge
+
+Deep comparison and fusion are performed on the two incoming data.
+
+**tips:**
+
+- `base` will be deeply copied before merging, so it will not be changed. 😛
+- To learn how merging works, visit: [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts).
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`base`|`any`|*The underlying data being compared.*|
+|`source`|`any`|*New data merged into the underlying data.*|
+
+**Return**
+
+`T` | `any`
+
+**Example**
+
+```ts
+const base = { a: 1, b: 2 };
+const source = { a: 3, c: 4 };
+toDeepMerge(base, source) // { a: 3, b: 2, c: 4 };
+
+const base1 = { a: [{ b: 3 }], b: { c: [{ d: 1 }, { e: 2 }] }};
+const source1 = { a: [{ b: 3, g: 6 }, { c: 4 }], b: { c: [{ d: 3 }, { e: 4 }] }};
+toDeepMerge(base1, source1) // { 'a': [{ 'b': 3 }, { 'b': 3, 'g': 6 }, { 'c': 4 }], 'b': { 'c': [{ 'd': 1 }, { 'e': 2 }, { 'd': 3 }, { 'e': 4 }] }};
+
+const base2 = [1, 2, 3, { b: 1 }];
+const source2 = [4, 5, 6, { a: 1 }, 7];
+toDeepMerge(base2, source2) // [1, 2, 3, { 'b': 1 }, 4, 5, 6, { 'a': 1 }, 7];
+```
+
+### toDeepConvertProperty
+
+Formatting properties of the object in the data.
+
+**tips:**
+
+This is a higher-order method that you usually need to use in conjunction with other utility functions. 😛
+
+**Params**
+
+|param|type|description|
+|:-:|:-:|:-:|
+|`data`|`any`|*The source data (`Array`|`Object`|`Map`).*|
+|`transformer`|`Function`|*A callback function used to convert properties.*|
+
+**Return**
+
+`any`
+
+**Example**
+
+```ts
+import { camelCase } from 'lodash';
+
+const toDeepCamelCase = (data: any) => toDeepConvertProperty(data, camelCase);
+
+toDeepCamelCase({ 'user_info': { 'user_name': 'name' }}) // { 'userInfo': { 'userName': 'name' }}
 ```
 
 ### toDelay

@@ -1,6 +1,6 @@
 # Vodyani utils
 
-😁 Provides common utility functions used in server-side development.
+🏃🏻‍♀️  "utils" provides common utility functions used in server-side development.
 
 [![Npm](https://img.shields.io/npm/v/@vodyani/utils/latest.svg)](https://www.npmjs.com/package/@vodyani/utils)
 [![Npm](https://img.shields.io/npm/v/@vodyani/utils/beta.svg)](https://www.npmjs.com/package/@vodyani/utils)

@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/vodyani/utils/compare/v1.2.0...v1.3.0) (2022-07-21)
+
+
+### Features
+
+* add merge and properties converter & style code 🌈 ([3b749fd](https://github.com/vodyani/utils/commit/3b749fd526f7fbf53f93ddd63e185aaa74644d7c))
+
 # [1.2.0](https://github.com/vodyani/utils/compare/v1.1.1...v1.2.0) (2022-07-19)
 
 

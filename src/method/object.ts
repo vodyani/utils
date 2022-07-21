@@ -40,7 +40,7 @@ export function isDictionary(dict: any) {
  * @publicApi
  */
 export function isKeyof(obj: object, key: string | number | symbol): key is keyof typeof obj {
-  return !isNil(obj) && isDictionary(obj) && key in obj && Object.prototype.hasOwnProperty.call(obj, key);
+  return isDictionary(obj) && key in obj && Object.prototype.hasOwnProperty.call(obj, key);
 }
 /**
  * Walks deeply through the object and returns the property value corresponding to the specified parameter.

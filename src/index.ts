@@ -1,2 +1,3 @@
-export * from './method';
 export * from './common';
+export * from './decorator';
+export * from './method';

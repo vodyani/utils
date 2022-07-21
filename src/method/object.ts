@@ -1,6 +1,9 @@
 import { Stream } from 'stream';
 
+import { deepmerge } from 'deepmerge-ts';
 import { isArray, isBuffer, isFunction, isMap, isNil, isObject, isRegExp, isSet, isString, isSymbol } from 'lodash';
+
+import { Method } from '../common';
 
 /**
  * Checks whether the current object is a dictionary.
@@ -49,12 +52,12 @@ export function isKeyof(obj: object, key: string | number | symbol): key is keyo
  *
  * @example
  * ```ts
- *  toMatch({ job: { name: 'job' }}, 'job.name') // 'job'
+ *  toDeepMatch({ job: { name: 'job' }}, 'job.name') // 'job'
  * ```
  *
  * @publicApi
  */
-export function toMatch<T = any>(obj: any, token: string, rule = '.'): T {
+export function toDeepMatch<T = any>(obj: any, token: string, rule = '.'): T {
   if (!isString(rule) || isNil(obj) || !isDictionary(obj)) return null;
 
   const stack = [];
@@ -100,12 +103,12 @@ export function toMatch<T = any>(obj: any, token: string, rule = '.'): T {
  *
  * @example
  * ```ts
- *  toRestore('job', 'job.name') // { job: { name: 'job' }}
+ *  toDeepRestore('job', 'job.name') // { job: { name: 'job' }}
  * ```
  *
  * @publicApi
  */
-export function toRestore<T = object>(value: any, token: string, rule = '.'): T {
+export function toDeepRestore<T = object>(value: any, token: string, rule = '.'): T {
   if (isNil(token) || !isString(token)) return null;
 
   const object = Object();
@@ -126,4 +129,74 @@ export function toRestore<T = object>(value: any, token: string, rule = '.'): T 
   }
 
   return object;
+}
+/**
+ * Deep comparison and fusion are performed on the two incoming data.
+ *
+ * @tips `base` will be deeply copied before merging, so it will not be changed.
+ *
+ * @param base The underlying data being compared.
+ * @param source New data merged into the underlying data.
+ * @returns `T` | `any`
+ *
+ * @publicApi
+ */
+export function toDeepMerge(base: any, source: any) {
+  if (!isNil(base) && isNil(source)) return base;
+  if (!(isObject(base) && isObject(source))) return source;
+  return deepmerge(base, source);
+}
+/**
+ * Formatting properties of the object in the data.
+ *
+ * @param data The source data (`Array`|`Object`|`Map`).
+ * @param transformer A callback function used to convert properties.
+ * @returns any
+ *
+ * @publicApi
+ *
+ * @tips Because this method uses recursion, it can cause stack overflows when the hierarchy is too deep !
+ */
+export function toDeepConvertProperty(data: any, transformer: Method<string>): any {
+  if (isNil(data)) return data;
+
+  let result = null;
+
+  const pipe = [
+    {
+      isAllowUse: isArray(data),
+      use: () => {
+        return data.map((item: any) => toDeepConvertProperty(item, transformer));
+      },
+    },
+    {
+      isAllowUse: isMap(data),
+      use: () => {
+        const result = new Map();
+        (data as Map<any, any>).forEach((v, k) => result.set(transformer(k), v));
+        return result;
+      },
+    },
+    {
+      isAllowUse: isDictionary(data),
+      use: () => {
+        const result = Object();
+        Object.keys(data).forEach((key: any) => {
+          result[transformer(key)] = toDeepConvertProperty(data[key], transformer);
+        });
+        return result;
+      },
+    },
+  ];
+
+  for (const { isAllowUse, use } of pipe) {
+    if (isAllowUse) {
+      result = use();
+      break;
+    }
+
+    result = data;
+  }
+
+  return result;
 }

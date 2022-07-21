@@ -36,7 +36,9 @@ npm install @vodyani/utils
 
 A class or method decorator which binds methods to the instance so this is always correct, even when the method is detached.
 
-**tips:** To learn how merging works, visit: [autobind-decorator](https://github.com/andreypopp/autobind-decorator).
+**Tips:**
+
+To learn how merging works, visit: [autobind-decorator](https://github.com/andreypopp/autobind-decorator).
 
 **Example**
 
@@ -180,7 +182,7 @@ toDeepRestore('mimi', 'cat.info.name') // { cat: { info: { name: 'mimi' } }
 
 Deep comparison and fusion are performed on the two incoming data.
 
-**tips:**
+**Tips:**
 
 - `base` will be deeply copied before merging, so it will not be changed. 😛
 - To learn how merging works, visit: [deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts).
@@ -218,7 +220,7 @@ toDeepMerge(base2, source2) // [1, 2, 3, { 'b': 1 }, 4, 5, 6, { 'a': 1 }, 7];
 
 Formatting properties of the object in the data.
 
-**tips:**
+**Tips:**
 
 This is a higher-order method that you usually need to use in conjunction with other utility functions. 😛
 
@@ -226,7 +228,7 @@ This is a higher-order method that you usually need to use in conjunction with o
 
 |param|type|description|
 |:-:|:-:|:-:|
-|`data`|`any`|*The source data (`Array`|`Object`|`Map`).*|
+|`data`|`any`|*The source data (`Array`/`Object`/`Map`).*|
 |`transformer`|`Function`|*A callback function used to convert properties.*|
 
 **Return**
@@ -236,7 +238,7 @@ This is a higher-order method that you usually need to use in conjunction with o
 **Example**
 
 ```ts
-import { toDeepCamelCase } from '@vodyani/utils';
+import { toDeepConvertProperty } from '@vodyani/utils';
 
 import { camelCase } from 'lodash';
 

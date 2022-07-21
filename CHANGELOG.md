@@ -1,3 +1,11 @@
+## [1.4.1-beta.1](https://github.com/vodyani/utils/compare/v1.4.0...v1.4.1-beta.1) (2022-07-21)
+
+
+### Bug Fixes
+
+* describe ([2095824](https://github.com/vodyani/utils/commit/20958244c0c0c203fbe542464b72edef447c518f))
+* is keyof ([07d6fb2](https://github.com/vodyani/utils/commit/07d6fb2cdc3dca96ed63cd3dd77e1c1b32cfc1e4))
+
 # [1.4.0](https://github.com/vodyani/utils/compare/v1.3.0...v1.4.0) (2022-07-21)
 
 

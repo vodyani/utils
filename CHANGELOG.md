@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/vodyani/utils/compare/v1.3.0...v1.4.0) (2022-07-21)
+
+
+### Features
+
+* add this (auto bind decorator) ([9daee2a](https://github.com/vodyani/utils/commit/9daee2a7885e2fbd019c51c1d4bf0aa775973248))
+* add this (auto bind decorator) ([587f2f0](https://github.com/vodyani/utils/commit/587f2f0b2159270640b81884f6a39acdc576d84e))
+
 # [1.3.0-beta.2](https://github.com/vodyani/utils/compare/v1.3.0-beta.1...v1.3.0-beta.2) (2022-07-21)
 
 

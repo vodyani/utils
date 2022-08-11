@@ -1,46 +1,95 @@
-import { Stream } from 'stream';
+import { Stream, Duplex } from 'stream';
 
 import { deepmerge } from 'deepmerge-ts';
-import { isArray, isBuffer, isFunction, isMap, isNil, isObject, isRegExp, isSet, isString, isSymbol } from 'lodash';
+import { isEmpty, isMap, isNil, isObject } from 'lodash';
 
-import { Method } from '../common';
+import { ConvertOptions, Method } from '../common';
+
+import { isValid, isValidArray, isValidDict, isValidString } from './validate';
 
 /**
- * Checks whether the current object is a dictionary.
+ * The process that carries out the transition.
  *
- * Dictionary is not in (`Map`/`Set`/`Symbol`/`Buffer`/`Array`/`Stream`/`RegExp`/`Function`/`String`/`Number`/`Boolean`).
+ * @tips There are two outcomes that return the `default`: `default` is entered and either the condition fails or the value is null.
  *
- * @param dict The object to judge.
- * @returns boolean
+ * @param data Data that needs to be transformed.
+ * @param options Options in transformation processing.
+ * @returns `T` | `any`
  *
  * @publicApi
  */
-export function isDictionary(dict: any) {
-  return isObject(dict)
-    && !isNil(dict)
-    && !isMap(dict)
-    && !isSet(dict)
-    && !isArray(dict)
-    && !isBuffer(dict)
-    && !isSymbol(dict)
-    && !isRegExp(dict)
-    && !isFunction(dict)
-    && !(dict instanceof Stream)
-    && !(dict instanceof String)
-    && !(dict instanceof Number)
-    && !(dict instanceof Boolean);
+export function toConvert<T = any>(data: any, options?: ConvertOptions): T {
+  const { condition, transformer, default: value } = options || Object();
+
+  if (condition) {
+    if (transformer && condition(data)) return transformer(data);
+    if (isValid(value)) return value;
+  }
+
+  return isNil(data) && isValid(value) ? value : data;
 }
 /**
- * Determines whether the object contains the current attribute.
+ * Convert data to string.
  *
- * @param obj The object to judge.
- * @param key The property of object.
- * @returns (is keyof typeof obj)
+ * @param data Data that needs to be transformed.
+ * @param defaultValue This value is returned when the incoming value does not match expectations.
+ * @returns string
  *
  * @publicApi
  */
-export function isKeyof(obj: object, key: string | number | symbol): key is keyof typeof obj {
-  return isDictionary(obj) && key in obj && Object.prototype.hasOwnProperty.call(obj, key);
+export function toString(data: any, defaultValue = ''): string {
+  return toConvert(data, {
+    transformer: String,
+    default: defaultValue,
+    condition: (data) => isValid(data) && !isEmpty(String(data)),
+  });
+}
+/**
+ * Convert data to number.
+ *
+ * @param data Data that needs to be transformed.
+ * @param defaultValue This value is returned when the incoming value does not match expectations.
+ * @returns number
+ *
+ * @publicApi
+ */
+export function toNumber(data: any, defaultValue = 0): number {
+  return toConvert(data, {
+    transformer: Number,
+    default: defaultValue,
+    condition: (data) => isValid(data) && Number.isSafeInteger(Number(data)),
+  });
+}
+/**
+ * Convert `Stream` data to `Buffer`.
+ *
+ * @param stream Data that needs to be transformed.
+ * @returns Promise<Buffer>
+ *
+ * @publicApi
+ */
+export async function toBuffer(stream: Stream): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const buffers: Uint8Array[] = [];
+    stream.on('error', reject);
+    stream.on('data', (data) => buffers.push(data));
+    stream.on('end', () => resolve(Buffer.concat(buffers)));
+  });
+}
+/**
+ * Convert `Buffer` data to `Stream`.
+ *
+ * @param buffer Data that needs to be transformed.
+ * @param encoding The encoding type.
+ * @returns Promise<Duplex>
+ *
+ * @publicApi
+ */
+export async function toStream(buffer: Buffer, encoding?: BufferEncoding): Promise<Duplex> {
+  const stream = new Duplex();
+  stream.push(buffer, encoding);
+  stream.push(null, encoding);
+  return stream;
 }
 /**
  * Walks deeply through the object and returns the property value corresponding to the specified parameter.
@@ -58,7 +107,7 @@ export function isKeyof(obj: object, key: string | number | symbol): key is keyo
  * @publicApi
  */
 export function toDeepMatch<T = any>(obj: any, token: string, rule = '.'): T {
-  if (!isString(rule) || isNil(obj) || !isDictionary(obj)) return null;
+  if (!isValidString(rule) || !isValidDict(obj)) return null;
 
   const stack = [];
   const factors = token.split(rule);
@@ -77,7 +126,7 @@ export function toDeepMatch<T = any>(obj: any, token: string, rule = '.'): T {
       break;
     }
 
-    if (isDictionary(node)) {
+    if (isValidDict(node)) {
       for (const key of Object.keys(node)) {
         const indexResult = factors.indexOf(key);
         const factorResult = factors[nodeDeepLevel];
@@ -109,7 +158,7 @@ export function toDeepMatch<T = any>(obj: any, token: string, rule = '.'): T {
  * @publicApi
  */
 export function toDeepRestore<T = object>(value: any, token: string, rule = '.'): T {
-  if (isNil(token) || !isString(token)) return null;
+  if (isNil(token) || !isValidString(token)) return null;
 
   const object = Object();
   const factors = token.split(rule);
@@ -141,10 +190,11 @@ export function toDeepRestore<T = object>(value: any, token: string, rule = '.')
  *
  * @publicApi
  */
-export function toDeepMerge(base: any, source: any) {
-  if (!isNil(base) && isNil(source)) return base;
+export function toDeepMerge<T = any>(base: any, source: any): T {
+  if (isValid(base) && isNil(source)) return base;
   if (!(isObject(base) && isObject(source))) return source;
-  return deepmerge(base, source);
+
+  return deepmerge(base, source) as any;
 }
 /**
  * Formatting properties of the object in the data.
@@ -164,12 +214,6 @@ export function toDeepConvertProperty(data: any, transformer: Method<string>): a
 
   const pipe = [
     {
-      isAllowUse: isArray(data),
-      use: () => {
-        return data.map((item: any) => toDeepConvertProperty(item, transformer));
-      },
-    },
-    {
       isAllowUse: isMap(data),
       use: () => {
         const result = new Map();
@@ -178,7 +222,13 @@ export function toDeepConvertProperty(data: any, transformer: Method<string>): a
       },
     },
     {
-      isAllowUse: isDictionary(data),
+      isAllowUse: isValidArray(data),
+      use: () => {
+        return data.map((item: any) => toDeepConvertProperty(item, transformer));
+      },
+    },
+    {
+      isAllowUse: isValidDict(data),
       use: () => {
         const result = Object();
         Object.keys(data).forEach((key: any) => {

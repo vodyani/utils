@@ -24,7 +24,7 @@ npm install @vodyani/utils
 
 ## Questions
 
-- [Vodyani utils discussions 🧐](https://github.com/vodyani/utils/discussions)
+- [Discussions 🧐](https://github.com/vodyani/utils/discussions)
 
 ## Team
 

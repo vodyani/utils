@@ -1,3 +1,10 @@
+## [8.4.2-beta.1](https://github.com/vodyani/utils/compare/v8.4.1...v8.4.2-beta.1) (2022-08-11)
+
+
+### Bug Fixes
+
+* validate dictionary class or function ([0168948](https://github.com/vodyani/utils/commit/0168948ee1b03aa53e42d60f4593e323d2fb421e))
+
 ## [1.4.2](https://github.com/vodyani/utils/compare/v1.4.1...v1.4.2) (2022-07-21)
 
 

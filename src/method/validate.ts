@@ -57,7 +57,6 @@ export function isValidArray(data: any[]): boolean {
 export function isValidObject(data: any): boolean {
   return isValid(data) && isObject(data) && Object.keys(data).length > 0;
 }
-
 /**
  * Checks if the data is stream.
  *
@@ -80,7 +79,6 @@ export function isValidStream(data: Stream) {
 export function isValidBuffer(data: Buffer) {
   return isValid(data) && isBuffer(data);
 }
-
 /**
  * Checks whether the current object is a dictionary.
  *

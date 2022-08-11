@@ -1,6 +1,6 @@
-import { isNil } from 'lodash';
-
 import { CycleClearHandler, CycleOptions, RetryOptions } from '../common';
+
+import { isValid } from './validate';
 
 /**
  * Wait during an asynchronous function call.
@@ -23,8 +23,8 @@ export function toDelay(delay: number) {
  * @publicApi
  */
 export function toCycle(callback: Function, options: CycleOptions): CycleClearHandler {
-  const args = options.args || [];
   let timeOutHandler: NodeJS.Timeout = null;
+  const args = options.args || [];
 
   const regularly = () => {
     close();
@@ -42,7 +42,7 @@ export function toCycle(callback: Function, options: CycleOptions): CycleClearHa
   };
 
   const close = () => {
-    if (!isNil(timeOutHandler)) clearHandler();
+    if (isValid(timeOutHandler)) clearHandler();
   };
 
   regularly();

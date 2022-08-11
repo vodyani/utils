@@ -4,9 +4,9 @@ import {
   toDelay,
   toRetry,
   toCycle,
-} from '../src';
+} from '../../src';
 
-describe('method.promise', () => {
+describe('promise', () => {
   it('toDelay', async () => {
     const start = Date.now();
     await toDelay(300);

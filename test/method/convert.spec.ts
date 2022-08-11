@@ -3,39 +3,40 @@
 /* eslint-disable no-array-constructor */
 /* eslint-disable no-new-wrappers */
 /* eslint-disable no-undefined */
-import { Stream } from 'stream';
-
 import { range, camelCase } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 
-import { isDictionary, isKeyof, toDeepConvertProperty, toDeepMerge, toDeepMatch, toDeepRestore } from '../src';
+import { toDeepConvertProperty, toDeepMerge, toDeepMatch, toDeepRestore, toNumber, toConvert, toString, toStream, toBuffer } from '../../src';
 
-describe('method.object', () => {
-  it('isDictionary', async () => {
-    expect(isDictionary({})).toBe(true);
-    expect(isDictionary(Object())).toBe(true);
-    expect(isDictionary({ name: 'dict' })).toBe(true);
-    expect(isDictionary(new String())).toBe(false);
-    expect(isDictionary(new Number())).toBe(false);
-    expect(isDictionary(new Boolean())).toBe(false);
-    expect(isDictionary(new Map())).toBe(false);
-    expect(isDictionary(new Set())).toBe(false);
-    expect(isDictionary(new Array())).toBe(false);
-    expect(isDictionary(Buffer.from([]))).toBe(false);
-    expect(isDictionary(new Stream())).toBe(false);
-    expect(isDictionary(null)).toBe(false);
-    expect(isDictionary(undefined)).toBe(false);
+describe('convert', () => {
+  it('toConvert', async () => {
+    expect(toConvert(undefined, { default: 1 })).toBe(1);
+    expect(toConvert(null)).toBe(null);
+    expect(toConvert(1, { default: 10 })).toBe(1);
+    expect(toConvert(1)).toBe(1);
   });
 
-  it('isKeyof', async () => {
-    const sym = Symbol(1);
-    const obj = { test: 'test' };
-    const obj1 = { 0: 'test' };
-    const obj2 = { [sym]: 'test' };
-    expect(isKeyof(obj, 'test')).toBe(true);
-    expect(isKeyof(obj, 'test1')).toBe(false);
-    expect(isKeyof(obj1, 0)).toBe(true);
-    expect(isKeyof(obj2, sym)).toBe(true);
+  it('toNumber', async () => {
+    expect(toNumber(undefined, 1)).toBe(1);
+    expect(toNumber(null)).toBe(0);
+    expect(toNumber(1, 10)).toBe(1);
+    expect(toNumber('1', 10)).toBe(1);
+    expect(toNumber(Number('test'), 1)).toBe(1);
+  });
+
+  it('toString', async () => {
+    expect(toString(undefined, '1')).toBe('1');
+    expect(toString(null)).toBe('');
+    expect(toString(1, '10')).toBe('1');
+    expect(toString('1', '10')).toBe('1');
+    expect(toString(Number('0'), '1')).toBe('0');
+  });
+
+  it('toStream toBuffer', async () => {
+    const buf = Buffer.from('1', 'utf-8');
+    const result = await toStream(buf);
+    const convertResult = await toBuffer(result);
+    expect(convertResult.toString()).toBe('1');
   });
 
   it('test toDeepMatch', () => {

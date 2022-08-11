@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/vodyani/utils/compare/v1.4.1...v1.4.2) (2022-07-21)
+
+
+### Bug Fixes
+
+* docs ([611d387](https://github.com/vodyani/utils/commit/611d3871f3b85af4361f871aae48730feed39846))
+
 ## [1.4.2-beta.1](https://github.com/vodyani/utils/compare/v1.4.1...v1.4.2-beta.1) (2022-07-21)
 
 

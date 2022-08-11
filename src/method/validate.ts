@@ -1,6 +1,6 @@
 import { Stream } from 'stream';
 
-import { isArray, isBuffer, isFunction, isMap, isNil, isNumber, isObject, isSet, isString, isSymbol } from 'lodash';
+import { isArray, isBuffer, isMap, isNil, isNumber, isObject, isSet, isString, isSymbol } from 'lodash';
 
 /**
  * Checks if the data is non-empty.
@@ -82,7 +82,7 @@ export function isValidBuffer(data: Buffer) {
 /**
  * Checks whether the current object is a dictionary.
  *
- * Dictionary is not in (`Map`/`Set`/`Symbol`/`Array`/`Function`/`String`/`Number`/`Boolean`).
+ * Dictionary is not in (`Map`/`Set`/`Symbol`/`Array`/`String`/`Number`/`Boolean`).
  *
  * @param dict The object to judge.
  * @returns boolean
@@ -95,7 +95,6 @@ export function isValidDict(dict: any) {
     && !isSet(dict)
     && !isArray(dict)
     && !isSymbol(dict)
-    && !isFunction(dict)
     && !(dict instanceof String)
     && !(dict instanceof Number)
     && !(dict instanceof Boolean);

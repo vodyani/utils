@@ -60,15 +60,8 @@
     ]
   },
   "dependencies": {
-    "dayjs": "^1.11.0",
     "deepmerge-ts": "4.2.1",
-    "lodash": "4.17.21",
-    "module-alias": "^2.2.2",
-    "uuid": "^8.3.2"
-  },
-  "peerDependencies": {
-    "@types/module-alias": "2.0.1",
-    "@types/uuid": "^8.3.4"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@commitlint/cli": "16.3.0",
@@ -76,10 +69,8 @@
     "@nestjs/testing": "8.4.7",
     "@types/jest": "27.5.2",
     "@types/lodash": "4.14.182",
-    "@types/module-alias": "2.0.1",
     "@types/node": "16.11.56",
     "@types/supertest": "2.0.12",
-    "@types/uuid": "^8.3.4",
     "@vodyani/eslint-config": "^1.1.0",
     "husky": "7.0.4",
     "jest": "27.5.1",

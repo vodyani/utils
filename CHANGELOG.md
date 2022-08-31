@@ -1,3 +1,10 @@
+# [8.5.0-beta.1](https://github.com/vodyani/utils/compare/v8.4.4...v8.5.0-beta.1) (2022-08-31)
+
+
+### Features
+
+* adding common tools package ([02a641d](https://github.com/vodyani/utils/commit/02a641d9cf10f9330c159cd6a49aed66cfd0bd48))
+
 ## [8.4.4](https://github.com/vodyani/utils/compare/v8.4.3...v8.4.4) (2022-08-31)
 
 

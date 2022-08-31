@@ -1,3 +1,10 @@
+## [8.4.4](https://github.com/vodyani/utils/compare/v8.4.3...v8.4.4) (2022-08-31)
+
+
+### Bug Fixes
+
+* ci ([4127b76](https://github.com/vodyani/utils/commit/4127b76104b086db930e9b73b541dd84849e338b))
+
 ## [8.4.3](https://github.com/vodyani/utils/compare/v8.4.2...v8.4.3) (2022-08-26)
 
 

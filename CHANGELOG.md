@@ -1,3 +1,17 @@
+## [8.4.4](https://github.com/vodyani/utils/compare/v8.4.3...v8.4.4) (2022-08-31)
+
+
+### Bug Fixes
+
+* ci ([4127b76](https://github.com/vodyani/utils/commit/4127b76104b086db930e9b73b541dd84849e338b))
+
+## [8.4.3](https://github.com/vodyani/utils/compare/v8.4.2...v8.4.3) (2022-08-26)
+
+
+### Bug Fixes
+
+* add missing types ([a79c5c9](https://github.com/vodyani/utils/commit/a79c5c94be2db82a8a1138ef070628a62904468f))
+
 ## [8.4.3-beta.1](https://github.com/vodyani/utils/compare/v8.4.2...v8.4.3-beta.1) (2022-08-26)
 
 

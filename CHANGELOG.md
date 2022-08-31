@@ -1,3 +1,10 @@
+## [8.5.1](https://github.com/vodyani/utils/compare/v8.5.0...v8.5.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* remove invalid dependency declarations ([d1e04e1](https://github.com/vodyani/utils/commit/d1e04e14cf57ae61c799f69ca2e089159f7173df))
+
 # [8.5.0](https://github.com/vodyani/utils/compare/v8.4.4...v8.5.0) (2022-08-31)
 
 

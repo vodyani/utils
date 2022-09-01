@@ -32,6 +32,8 @@ npm install @vodyani/utils
 |:-:|
 |[ChoGathK](https://github.com/chogathK)|
 
+![Alt](https://repobeats.axiom.co/api/embed/1e23cf3a598d3f75555c9bccab6664de44857ab3.svg "Repobeats analytics image")
+
 ## License
 
 Vodyani utils is [MIT licensed](LICENSE).

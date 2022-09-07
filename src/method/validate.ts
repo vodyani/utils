@@ -3,10 +3,20 @@ import { Stream } from 'stream';
 import { isArray, isBuffer, isMap, isNil, isNumber, isObject, isSet, isString, isSymbol } from 'lodash';
 
 /**
+ * Determines whether the object contains the current attribute.
+ *
+ * @param obj The object to judge.
+ * @param key The property of object.
+ *
+ * @publicApi
+ */
+export function isKeyof(obj: object, key: any): key is keyof typeof obj {
+  return key in obj && Object.prototype.hasOwnProperty.call(obj, key);
+}
+/**
  * Checks if the data is non-empty.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -17,7 +27,6 @@ export function isValid(data: any): boolean {
  * Checks if the data is non-empty string.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -28,7 +37,6 @@ export function isValidString(data: string): boolean {
  * Checks if the data is non-empty number (Also it will not be NAN or plus or minus infinity).
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -39,7 +47,6 @@ export function isValidNumber(data: number): boolean {
  * Checks if the data is non-empty array.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -50,7 +57,6 @@ export function isValidArray(data: any[]): boolean {
  * Checks if the data is non-empty object.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -61,7 +67,6 @@ export function isValidObject(data: any): boolean {
  * Checks if the data is stream.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -72,7 +77,6 @@ export function isValidStream(data: Stream) {
  * Checks if the data is buffer.
  *
  * @param data The data to be check.
- * @returns boolean
  *
  * @publicApi
  */
@@ -85,7 +89,6 @@ export function isValidBuffer(data: Buffer) {
  * Dictionary is not in (`Map`/`Set`/`Symbol`/`Array`/`String`/`Number`/`Boolean`).
  *
  * @param dict The object to judge.
- * @returns boolean
  *
  * @publicApi
  */
@@ -98,16 +101,4 @@ export function isValidDict(dict: any) {
     && !(dict instanceof String)
     && !(dict instanceof Number)
     && !(dict instanceof Boolean);
-}
-/**
- * Determines whether the object contains the current attribute.
- *
- * @param obj The object to judge.
- * @param key The property of object.
- * @returns (is keyof typeof obj)
- *
- * @publicApi
- */
-export function isKeyof(obj: object, key: string | number): key is keyof typeof obj {
-  return key in obj && Object.prototype.hasOwnProperty.call(obj, key);
 }

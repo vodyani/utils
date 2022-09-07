@@ -1,3 +1,11 @@
+## [8.5.2](https://github.com/vodyani/utils/compare/v8.5.1...v8.5.2) (2022-09-07)
+
+
+### Bug Fixes
+
+* delete unnecessary types ([768cd62](https://github.com/vodyani/utils/commit/768cd62ff21aef09fb69fecab35b0ce9ef0d4040))
+* simplify naming and method calls ([57fc440](https://github.com/vodyani/utils/commit/57fc440e997ad1d8f4a2e67c128e8c89a2faed5d))
+
 ## [8.5.2-beta.1](https://github.com/vodyani/utils/compare/v8.5.1...v8.5.2-beta.1) (2022-09-07)
 
 

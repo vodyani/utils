@@ -1,12 +1,12 @@
+import { PriorityElement } from '../common';
 import { isValid, isValidNumber } from '../method';
-import { PriorityQueueElement, SortRule } from '../common';
 
 export class PriorityQueue {
   private readonly sort: Function;
 
-  private readonly data: PriorityQueueElement[] = [];
+  private readonly data: PriorityElement[] = [];
 
-  constructor(rule?: SortRule) {
+  constructor(rule?: 'DESC' | 'ASC') {
     this.sort = (_before: number, _after: number) => {
       return rule === 'ASC' ? _before - _after : _after - _before;
     };
@@ -24,11 +24,11 @@ export class PriorityQueue {
     return this.data.length;
   }
 
-  public pop<T = any>(): PriorityQueueElement<T> {
+  public pop<T = any>(): PriorityElement<T> {
     return this.data.pop();
   }
 
-  public peek<T = any>(): PriorityQueueElement<T> {
+  public peek<T = any>(): PriorityElement<T> {
     return this.data[this.data.length - 1];
   }
 

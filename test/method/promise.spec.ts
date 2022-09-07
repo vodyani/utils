@@ -1,19 +1,19 @@
 import { describe, it, expect } from '@jest/globals';
 
 import {
-  toDelay,
-  toRetry,
-  toCycle,
+  sleep,
+  retry,
+  circular,
 } from '../../src';
 
 describe('promise', () => {
-  it('toDelay', async () => {
+  it('sleep', async () => {
     const start = Date.now();
-    await toDelay(300);
+    await sleep(300);
     expect(Date.now() - start).toBeGreaterThanOrEqual(299);
   });
 
-  it('toRetry', async () => {
+  it('retry', async () => {
     let count = 0;
 
     const fn = async () => {
@@ -25,12 +25,12 @@ describe('promise', () => {
       return count;
     };
 
-    const result = await toRetry(fn, { delay: 100, count: 3 });
+    const result = await retry(fn, 3, 100);
 
     expect(result).toBe(1);
   });
 
-  it('toRetry.error', async () => {
+  it('retry.error', async () => {
     let result = 0;
 
     const fn = async () => {
@@ -38,7 +38,7 @@ describe('promise', () => {
     };
 
     try {
-      result = await toRetry(fn, { delay: 100, count: 3 });
+      result = await retry(fn, 3, 100);
     } catch (error) {
       expect(error.message).toBe('Error: async error');
     }
@@ -46,34 +46,34 @@ describe('promise', () => {
     expect(result).toBe(0);
   });
 
-  it('toCycle', async () => {
+  it('circular', async () => {
     let count = 0;
 
     const fn = () => {
       count++;
     };
 
-    const { close } = toCycle(fn, { interval: 100 });
+    const { close } = circular(fn, 100);
 
-    await toDelay(250);
+    await sleep(250);
 
     close();
 
     expect(count).toBeGreaterThanOrEqual(1);
   });
 
-  it('toCycle.clear', async () => {
+  it('circular.clear', async () => {
     let count = 0;
 
     const fn = () => {
       count++;
     };
 
-    const { close } = toCycle(fn, { interval: 100 });
+    const { close } = circular(fn, 100);
 
     close();
 
-    await toDelay(300);
+    await sleep(300);
 
     expect(count).toBe(0);
   });

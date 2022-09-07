@@ -1,4 +1,3 @@
-/* eslint-disable no-new-wrappers */
 import { Stream } from 'stream';
 
 import { describe, it, expect } from '@jest/globals';
@@ -10,9 +9,9 @@ describe('validate', () => {
     expect(isValidDict({ name: 'dict' })).toBe(true);
     expect(isValidDict({})).toBe(false);
     expect(isValidDict(Object())).toBe(false);
-    expect(isValidDict(new String())).toBe(false);
-    expect(isValidDict(new Number())).toBe(false);
-    expect(isValidDict(new Boolean())).toBe(false);
+    expect(isValidDict(String())).toBe(false);
+    expect(isValidDict(Number())).toBe(false);
+    expect(isValidDict(Boolean())).toBe(false);
     expect(isValidDict(new Map())).toBe(false);
     expect(isValidDict(new Set())).toBe(false);
     expect(isValidDict([])).toBe(false);
@@ -34,7 +33,6 @@ describe('validate', () => {
   });
 
   it('isValid', async () => {
-    // eslint-disable-next-line no-undefined
     expect(isValid(undefined)).toBe(false);
     expect(isValid(null)).toBe(false);
     expect(isValid([])).toBe(true);
@@ -45,7 +43,6 @@ describe('validate', () => {
   });
 
   it('isValidArray', async () => {
-    // eslint-disable-next-line no-undefined
     expect(isValidArray(undefined as any)).toBe(false);
     expect(isValidArray(null as any)).toBe(false);
     expect(isValidArray([])).toBe(false);
@@ -56,7 +53,6 @@ describe('validate', () => {
   });
 
   it('isValidNumber', async () => {
-    // eslint-disable-next-line no-undefined
     expect(isValidNumber(undefined as any)).toBe(false);
     expect(isValidNumber(null as any)).toBe(false);
     expect(isValidNumber(0)).toBe(true);
@@ -67,7 +63,6 @@ describe('validate', () => {
   });
 
   it('isValidObject', async () => {
-    // eslint-disable-next-line no-undefined
     expect(isValidObject(undefined)).toBe(false);
     expect(isValidObject(null)).toBe(false);
     expect(isValidObject({})).toBe(false);
@@ -75,7 +70,6 @@ describe('validate', () => {
   });
 
   it('isValidString', async () => {
-    // eslint-disable-next-line no-undefined
     expect(isValidString(undefined as any)).toBe(false);
     expect(isValidString(null as any)).toBe(false);
     expect(isValidString('')).toBe(false);

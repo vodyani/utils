@@ -1,8 +1,3 @@
-/* eslint-disable no-buffer-constructor */
-/* eslint-disable @typescript-eslint/no-array-constructor */
-/* eslint-disable no-array-constructor */
-/* eslint-disable no-new-wrappers */
-/* eslint-disable no-undefined */
 import { range, camelCase } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 

@@ -60,7 +60,7 @@
     ]
   },
   "dependencies": {
-    "deepmerge-ts": "4.2.1",
+    "deepmerge-ts": "4.2.2",
     "lodash": "4.17.21"
   },
   "devDependencies": {

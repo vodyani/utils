@@ -19,8 +19,8 @@ npm install @vodyani/utils
 
 ## Getting started
 
-- [使用文档 📚](https://vodyani.vercel.app/docs/other/utils)
-- [Documentation 📚](https://vodyani.vercel.app/en/docs/other/utils)
+- [使用文档 📚](https://vodyani.netlify.app/docs/other/utils)
+- [Documentation 📚](https://vodyani.netlify.app/en/docs/other/utils)
 
 ## Questions
 

@@ -1,7 +1,7 @@
 {
   "name": "@vodyani/utils",
   "license": "MIT",
-  "version": "8.6.0-beta.1",
+  "version": "8.6.0",
   "author": "ChoGathK",
   "description": "🏃🏻‍♀️ utils provides common utility functions used in server-side development.",
   "homepage": "https://github.com/vodyani/utils#readme",

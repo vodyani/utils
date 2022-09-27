@@ -19,13 +19,17 @@ export interface ConvertOptions {
   transformer?: Function;
 }
 
-export class PriorityElement<T = any> {
+export interface PriorityElement<T = any> {
   /**
    * Priority Indicates the weight of the queue.
    */
-  public weight: number;
+  weight: number;
   /**
    * The actual content.
    */
-  public value: T;
+  value: T;
+}
+
+export interface CircularHandler {
+  close(): void;
 }

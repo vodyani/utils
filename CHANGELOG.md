@@ -1,3 +1,10 @@
+## [8.6.1](https://github.com/vodyani/utils/compare/v8.6.0...v8.6.1) (2022-09-27)
+
+
+### Bug Fixes
+
+* circular and priority queue types 🐛 ([2ee3f1e](https://github.com/vodyani/utils/commit/2ee3f1ea551ba40c1a901ff98a17ae6ae9f2ea60))
+
 # [8.6.0](https://github.com/vodyani/utils/compare/v8.5.2...v8.6.0) (2022-09-26)
 
 

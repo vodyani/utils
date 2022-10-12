@@ -1,3 +1,10 @@
+# [8.7.0](https://github.com/vodyani/utils/compare/v8.6.1...v8.7.0) (2022-10-12)
+
+
+### Features
+
+* optimize the efficiency of depth traversal and add to deep save method ([36ececc](https://github.com/vodyani/utils/commit/36ececcb507401d3d003ee5423a20abf95f6e774))
+
 # [8.7.0-beta.1](https://github.com/vodyani/utils/compare/v8.6.1...v8.7.0-beta.1) (2022-10-12)
 
 

@@ -1,3 +1,10 @@
+## [8.7.1](https://github.com/vodyani/utils/compare/v8.7.0...v8.7.1) (2022-10-12)
+
+
+### Bug Fixes
+
+* deep match obj type ([29022e8](https://github.com/vodyani/utils/commit/29022e8224c6d1439453071d088a80d6f73c2149))
+
 # [8.7.0](https://github.com/vodyani/utils/compare/v8.6.1...v8.7.0) (2022-10-12)
 
 

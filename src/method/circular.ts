@@ -1,3 +1,5 @@
+import { CircularHandler } from '../common';
+
 /**
  * Create a recurring scheduled task.
  *
@@ -7,7 +9,7 @@
  *
  * @publicApi
  */
-export function circular(callback: Function, interval: number, ...args: any[]) {
+export function circular(callback: Function, interval: number, ...args: any[]): CircularHandler {
   let timer: NodeJS.Timeout = null;
 
   const close = () => {

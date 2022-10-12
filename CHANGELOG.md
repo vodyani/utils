@@ -1,3 +1,22 @@
+## [8.6.1](https://github.com/vodyani/utils/compare/v8.6.0...v8.6.1) (2022-09-27)
+
+
+### Bug Fixes
+
+* circular and priority queue types 🐛 ([2ee3f1e](https://github.com/vodyani/utils/commit/2ee3f1ea551ba40c1a901ff98a17ae6ae9f2ea60))
+
+# [8.6.0](https://github.com/vodyani/utils/compare/v8.5.2...v8.6.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency deepmerge-ts to v4.2.2 ([8f8cbe8](https://github.com/vodyani/utils/commit/8f8cbe81509b071193c45b9465442d8d7bda7f3f))
+
+
+### Features
+
+* add object hash deps & style code ([1cd6a6b](https://github.com/vodyani/utils/commit/1cd6a6b3d8092879136509cfea8b9015b4493c41))
+
 # [8.6.0-beta.1](https://github.com/vodyani/utils/compare/v8.5.2...v8.6.0-beta.1) (2022-09-26)
 
 

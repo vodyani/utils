@@ -18,7 +18,7 @@ import { isValid, isValidDict, isValidString } from './validate';
  *
  * @publicApi
  */
-export function toDeepMatch<T = any>(obj: object, key: string, rule = '.'): T {
+export function toDeepMatch<T = any>(obj: any, key: string, rule = '.'): T {
   if (!isValidString(rule) || !isValidDict(obj)) return null;
 
   const stack = [];

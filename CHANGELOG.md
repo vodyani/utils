@@ -1,3 +1,10 @@
+## [8.8.1](https://github.com/vodyani/utils/compare/v8.8.0...v8.8.1) (2022-10-18)
+
+
+### Bug Fixes
+
+* deep replace ([162e6b3](https://github.com/vodyani/utils/commit/162e6b3aedf43bbddb46ecb6f6063ee65fb6bb07))
+
 # [8.8.0](https://github.com/vodyani/utils/compare/v8.7.1...v8.8.0) (2022-10-18)
 
 

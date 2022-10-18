@@ -2,7 +2,7 @@ import { Stream } from 'stream';
 
 import { describe, it, expect } from '@jest/globals';
 
-import { isKeyof, isValidDict, isValidBuffer, isValidStream, isValidNumber, isValid, isValidArray, isValidObject, isValidString } from '../../src';
+import { isKeyof, isValidDict, isValidBuffer, isValidStream, isValidNumber, isValid, isValidArray, isValidObject, isValidString, isValidArrayBuffer } from '../../src';
 
 describe('validate', () => {
   it('isValidDict', async () => {
@@ -24,6 +24,12 @@ describe('validate', () => {
     const buffer = Buffer.from([]);
     expect(isValidBuffer(buffer)).toBe(true);
     expect(isValidBuffer(Object())).toBe(false);
+  });
+
+  it('isValidBuffer', async () => {
+    const buffer = new ArrayBuffer(1);
+    expect(isValidArrayBuffer(buffer)).toBe(true);
+    expect(isValidArrayBuffer(Object())).toBe(false);
   });
 
   it('isValidStream', async () => {

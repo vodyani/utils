@@ -60,8 +60,8 @@
     ]
   },
   "dependencies": {
-    "deepmerge-ts": "4.2.2",
-    "lodash": "4.17.21",
+    "deepmerge-ts": "^4.2.2",
+    "lodash": "^4.17.21",
     "object-hash": "^3.0.0"
   },
   "devDependencies": {

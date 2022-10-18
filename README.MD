@@ -1,6 +1,6 @@
 # Vodyani utils
 
-🏃🏻‍♀️ Vodyani utils 提供了开发中常用的工具方法，包含：验证、转换、异步处理、算法、数据结构等功能。
+🏃🏻‍♀️ utils 是一个函数工具库，提供了验证、转换、异步处理、算法、数据结构等功能。
 
 [![Npm](https://img.shields.io/npm/v/@vodyani/utils/latest.svg)](https://www.npmjs.com/package/@vodyani/utils)
 [![Npm](https://img.shields.io/npm/v/@vodyani/utils/beta.svg)](https://www.npmjs.com/package/@vodyani/utils)

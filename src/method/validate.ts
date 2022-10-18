@@ -1,6 +1,6 @@
 import { Stream } from 'stream';
 
-import { isArray, isBuffer, isMap, isNil, isNumber, isObject, isSet, isString, isSymbol } from 'lodash';
+import { isArray, isArrayBuffer, isBoolean, isBuffer, isMap, isNil, isNumber, isObject, isSet, isString, isSymbol } from 'lodash';
 
 /**
  * Determines whether the object contains the current attribute.
@@ -64,41 +64,51 @@ export function isValidObject(data: any): boolean {
   return isValid(data) && isObject(data) && Object.keys(data).length > 0;
 }
 /**
- * Checks if the data is stream.
+ * Checks if the data is Stream.
  *
  * @param data The data to be check.
  *
  * @publicApi
  */
-export function isValidStream(data: Stream) {
+export function isValidStream(data: any) {
   return isValid(data) && data instanceof Stream;
 }
 /**
- * Checks if the data is buffer.
+ * Checks if the data is Buffer.
  *
  * @param data The data to be check.
  *
  * @publicApi
  */
-export function isValidBuffer(data: Buffer) {
+export function isValidBuffer(data: any) {
   return isValid(data) && isBuffer(data);
+}
+/**
+ * Checks if the data is ArrayBuffer.
+ *
+ * @param data The data to be check.
+ *
+ * @publicApi
+ */
+export function isValidArrayBuffer(data: any) {
+  return isValid(data) && isArrayBuffer(data);
 }
 /**
  * Checks whether the current object is a dictionary.
  *
  * Dictionary is not in (`Map`/`Set`/`Symbol`/`Array`/`String`/`Number`/`Boolean`).
  *
- * @param dict The object to judge.
+ * @param obj The object to judge.
  *
  * @publicApi
  */
-export function isValidDict(dict: any) {
-  return isValidObject(dict)
-    && !isMap(dict)
-    && !isSet(dict)
-    && !isArray(dict)
-    && !isSymbol(dict)
-    && !(dict instanceof String)
-    && !(dict instanceof Number)
-    && !(dict instanceof Boolean);
+export function isValidDict(obj: any) {
+  return isValidObject(obj)
+    && !isMap(obj)
+    && !isSet(obj)
+    && !isArray(obj)
+    && !isSymbol(obj)
+    && !isString(obj)
+    && !isNumber(obj)
+    && !isBoolean(obj);
 }

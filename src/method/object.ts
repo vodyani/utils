@@ -67,12 +67,12 @@ export function toDeepMatch<T = any>(obj: any, key: string, rule = '.'): T {
  *
  * @example
  * ```ts
- *  toDeepMatch({ worker: { name: 'Chogath' }}, 'worker.name') // 'Chogath'
+ *  toDeepReplace({ worker: { name: 'Chogath' }}, 'Chogath_Changed', 'worker.name') // { worker: { name: 'Chogath_Changed' }}
  * ```
  *
  * @publicApi
  */
-export function toDeepSave<T = object>(obj: T, value: any, key: string, rule = '.'): void {
+export function toDeepReplace<T = object>(obj: T, value: any, key: string, rule = '.') {
   if (!isValidString(rule) || !isValidDict(obj)) return null;
 
   const stack = [];
@@ -106,6 +106,8 @@ export function toDeepSave<T = object>(obj: T, value: any, key: string, rule = '
       }
     }
   }
+
+  return obj;
 }
 /**
  * Restores to the corresponding object based on the depth of the specified property and property value.

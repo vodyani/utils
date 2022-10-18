@@ -1,7 +1,7 @@
 import { range, camelCase } from 'lodash';
 import { describe, it, expect } from '@jest/globals';
 
-import { toDeepConvertProperty, toDeepMerge, toDeepMatch, toDeepRestore, toNumber, toConvert, toString, toStream, toBuffer, toDeepSave } from '../../src';
+import { toDeepConvertProperty, toDeepMerge, toDeepMatch, toDeepRestore, toNumber, toConvert, toString, toStream, toBuffer, toDeepReplace } from '../../src';
 
 describe('convert', () => {
   it('toConvert', async () => {
@@ -46,23 +46,23 @@ describe('convert', () => {
     expect(toDeepMatch(obj2, 'b')).toBe(2);
   });
 
-  it('test toDeepSave', () => {
+  it('test toDeepReplace', () => {
     const obj = { a: { b: { c: { d: { e: { f: [1] }}}}, c: { d: 2 }}};
 
-    toDeepSave(obj, 'f', 'a.b.c.d.e.f');
-    toDeepSave(obj, 'd', 'a.c.d');
+    toDeepReplace(obj, 'f', 'a.b.c.d.e.f');
+    toDeepReplace(obj, 'd', 'a.c.d');
 
     expect(toDeepMatch(obj, 'a.b.c.d.e.f')).toBe('f');
     expect(toDeepMatch(obj, 'a.c.d')).toBe('d');
 
-    expect(toDeepSave(null, 'a', 'a')).toBe(null);
+    expect(toDeepReplace(null, 'a', 'a')).toBe(null);
 
-    toDeepSave(obj, null, 'a');
+    toDeepReplace(obj, null, 'a');
     expect(toDeepMatch(obj, 'a')).toBe(null);
 
     const obj2 = { a: [{ name: 1 }], b: 2 };
 
-    toDeepSave(obj2, 'd', 'c.d');
+    toDeepReplace(obj2, 'd', 'c.d');
 
     expect(toDeepMatch(obj2, 'c.d')).toBe(null);
   });

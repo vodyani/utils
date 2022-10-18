@@ -1,3 +1,10 @@
+# [8.8.0](https://github.com/vodyani/utils/compare/v8.7.1...v8.8.0) (2022-10-18)
+
+
+### Features
+
+* add array buffer validate method ([6964bb7](https://github.com/vodyani/utils/commit/6964bb787bfae68cf6bb08636aefa3291381cad3))
+
 ## [8.7.1](https://github.com/vodyani/utils/compare/v8.7.0...v8.7.1) (2022-10-12)
 
 

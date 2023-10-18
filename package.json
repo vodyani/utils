@@ -70,7 +70,7 @@
     "@nestjs/testing": "8.4.7",
     "@types/jest": "27.5.2",
     "@types/lodash": "4.14.182",
-    "@types/node": "16.11.56",
+    "@types/node": "18.18.6",
     "@types/object-hash": "^2.2.1",
     "@types/supertest": "2.0.12",
     "@vodyani/eslint-config": "^1.1.0",
